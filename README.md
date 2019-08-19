@@ -1,5 +1,5 @@
 # Killer
 
-[apk下载](./releaseapp-debug.apk)
+[apk下载](./release/app-debug.apk)
 
  
