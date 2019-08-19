@@ -1,2 +1,5 @@
-# Demo2020
-Demo2020 -github
+# Killer
+
+[apk下载](./releaseapp-debug.apk)
+
+ 
