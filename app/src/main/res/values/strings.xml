@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Killer</string>
+    <string name="input_ip_hint">IP地址</string>
+    <string name="input_port_hint">端口</string>
+    <string name="connect">连接</string>
+    <string name="remote_address">远程地址%s</string>
+    <string name="local_address">本地地址%s</string>
+
+
+</resources>

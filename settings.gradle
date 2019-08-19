@@ -1,0 +1,1 @@
+include ':app',  ':android-common', ':thirdparty-pack', ':drawer-lib', ':model'

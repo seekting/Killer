@@ -1,0 +1,40 @@
+<resources>
+
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+
+    <!--</style>-->
+
+    <!--&lt;!&ndash;&ndash;&gt;-->
+
+
+
+    <!--<style name="AppTheme.NoActionBar">-->
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="windowNoTitle">true</item>-->
+    <!--</style>-->
+
+
+    <!--<style name="demoTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+
+        <!--&lt;!&ndash;状态栏颜色&ndash;&gt;-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--&lt;!&ndash;控制各个控件被选中时的颜色&ndash;&gt;-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--&lt;!&ndash;页面背景色&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:windowBackground">@color/windowBackg</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;底部导航栏颜色&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:navigationBarColor">@color/navigationColor</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;Appbar背景色&ndash;&gt;-->
+        <!--<item name="android:colorPrimary">@color/colorPrimary</item>-->
+        <!--&lt;!&ndash;ToolBar上的Title颜色&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:textColorPrimary">@color/textColorPrimary</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;各个控制控件的默认颜色&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:colorControlNormal">@color/colorControlNormal</item>&ndash;&gt;-->
+    <!--</style>-->
+
+
+</resources>

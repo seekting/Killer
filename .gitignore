@@ -45,7 +45,7 @@ captures/
 .idea/dataSources.ids
 *.iml
 #green dao
-
+skt/
 /app/release/
 apk/
 temp/

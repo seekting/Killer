@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+
+        <variable
+            name="activity"
+            type="com.seekting.killer.KillerActivity"/>
+    </data>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/remote_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:text="远程地址"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/local_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:text="本地地址"
+            android:textSize="14sp"
+            />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+            <Spinner
+                android:id="@+id/bars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人员列表"
+                app:layout_constraintBottom_toBottomOf="@+id/bars_status"
+                app:layout_constraintEnd_toStartOf="@+id/bars_status"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bars_status">
+
+            </Spinner>
+
+            <LinearLayout
+                android:id="@+id/bars_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/persons"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bars"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="232dp"
+                tools:layout_editor_absoluteY="205dp">
+
+                <Button
+                    android:id="@+id/up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{activity::onUpClick}"
+                    android:text="起靶"/>
+
+                <Button
+                    android:id="@+id/down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{activity::onDownClick}"
+                    android:text="倒靶"/>
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/persons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人员列表"
+                app:layout_constraintBottom_toBottomOf="@+id/person_status"
+                app:layout_constraintEnd_toStartOf="@+id/bars_status"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/person_status">
+
+            </Spinner>
+
+            <LinearLayout
+                android:id="@+id/person_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/persons"
+                app:layout_constraintTop_toBottomOf="@+id/bars_status"
+                >
+
+                <Button
+                    android:id="@+id/out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{activity::onOutClick}"
+                    android:text="出局"/>
+
+                <Button
+                    android:id="@+id/alive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{activity::onAliveClick}"
+                    android:text="复活"/>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>
