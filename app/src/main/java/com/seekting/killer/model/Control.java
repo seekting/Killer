@@ -13,6 +13,11 @@ public class Control implements Serializable {
     public static final String PERSON_ACTION_DIE = "0";
     public static final String PERSON_ACTION_ALIVE = "1";
     public static final String PERSON_ACTION_ADD = "2";
+
+    public static final String BAR_ACTION_UP = "0";
+    public static final String BAR_ACTION_DOWN = "1";
+    public static final String BAR_ACTION_SCREAM = "2";
+    public static final String BAR_ACTION_SOUND = "3";
     @SerializedName("action")
     private String action;
 

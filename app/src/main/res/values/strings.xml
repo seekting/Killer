@@ -18,4 +18,10 @@
     <string name="person_control_alive">死亡复活</string>
     <string name="person_control_add">补充弹数</string>
 
+
+    <string name="bar_control_up">起靶</string>
+    <string name="bar_control_down">倒靶</string>
+    <string name="bar_control_scream">尖叫</string>
+    <string name="bar_control_sound">枪声</string>
+
 </resources>
