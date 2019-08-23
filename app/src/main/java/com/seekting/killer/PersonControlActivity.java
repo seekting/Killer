@@ -41,6 +41,7 @@ public class PersonControlActivity extends AppCompatActivity implements ConnectM
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         mLayoutInflater = LayoutInflater.from(this);
         mPersonActivityBinding = DataBindingUtil.setContentView(this, R.layout.person_activity);
         mPersonActivityBinding.setActivity(this);
