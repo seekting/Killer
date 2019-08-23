@@ -18,7 +18,7 @@ public class ProgressUtils {
         builder.setView(view);
         AlertDialog dialog = builder.create();
 
-        dialog.show();
+        DialogUtils.showDialog(dialog);
         WindowManager m = activity.getWindowManager();
         Display d = m.getDefaultDisplay();  //为获取屏幕宽、高
         android.view.WindowManager.LayoutParams p = dialog.getWindow().getAttributes();  //获取对话框当前的参数值

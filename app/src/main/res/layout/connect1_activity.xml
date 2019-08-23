@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.seekting.killer.Connect1Activity"/>
+
+        <variable
+            name="iPAddress"
+            type="com.seekting.killer.model.IPAddress"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="@dimen/margin"
+            android:src="@mipmap/back_arrow"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:text="@string/data_connect"
+            android:textColor="#1f1f1f"
+            android:textSize="28sp"/>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="4">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ip_address"/>
+
+                    <EditText
+                        android:id="@+id/ip_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="0.0.0.0:0"
+                        android:singleLine="true"
+                        android:text="@={iPAddress.shortString}"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_gravity="end">
+
+                    <Button
+                        android:id="@+id/cancel_action"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="@dimen/margin"
+                        android:background="@drawable/button_selector"
+                        android:onClick="@{activity::onCancelClick}"
+                        android:text="@string/cancel"
+                        android:textColor="@color/button_text_color"/>
+
+                    <Button
+                        android:id="@+id/ok_action"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="@dimen/margin"
+                        android:background="@drawable/button_selector"
+                        android:onClick="@{activity::onConnectedClick}"
+                        android:text="@string/ok"
+                        android:textColor="@color/button_text_color"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="3"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

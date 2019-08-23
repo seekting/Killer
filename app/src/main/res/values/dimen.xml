@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin">26dp</dimen>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
     <dimen name="ip_v4_input">0dp</dimen>
     <dimen name="ip_v4_port_input">0dp</dimen>
 </resources>

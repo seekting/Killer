@@ -9,4 +9,10 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="ios_button">
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:background">@drawable/button_selector</item>
+
+    </style>
+
 </resources>

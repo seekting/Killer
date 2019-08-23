@@ -13,10 +13,21 @@
         <activity
             android:name=".KillerActivity"
             android:screenOrientation="portrait"
-
-            ></activity>
+            />
+        <activity
+            android:name=".PersonControlActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ConnectActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".Connect1Activity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".IndexActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             >

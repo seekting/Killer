@@ -1,10 +1,21 @@
 <resources>
-    <string name="app_name">Killer</string>
+    <string name="app_name">导控终端</string>
+    <string name="daokong_control">导控指定</string>
+    <string name="caiding_control">裁定指定</string>
+    <string name="data_update">数据采集</string>
+    <string name="data_connect">数据通讯</string>
     <string name="input_ip_hint">IP地址</string>
     <string name="input_port_hint">端口</string>
     <string name="connect">连接</string>
     <string name="remote_address">远程地址%s</string>
     <string name="local_address">本地地址%s</string>
+    <string name="ip_address">ip地址:</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确认</string>
 
+
+    <string name="person_control_die">违规裁死</string>
+    <string name="person_control_alive">死亡复活</string>
+    <string name="person_control_add">补充弹数</string>
 
 </resources>

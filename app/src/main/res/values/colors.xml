@@ -3,4 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <drawable name="drawable_translate">#00000000</drawable>
+    <drawable name="drawable_control_item_bg">#22000000</drawable>
+    <color name="button_text_color">#ffffff</color>
+
+
+    <!--https://www.zcool.com.cn/article/ZNDIwNzQw.html-->
+    <color name="button_normal_color">#009ee2</color>
+    <color name="button_press_color">#007ea0</color>
+    <color name="button_select_color">#00bbff</color>
+    <color name="button_unable_color">#c9caca</color>
+
 </resources>

@@ -188,22 +188,41 @@ public class IPAddressConnector {
                 Set selectedKeys = mSelector.selectedKeys();
                 Log.d("seekting", "IPAddressConnector.loopConnect()" + number);
                 Iterator keyIterator = selectedKeys.iterator();
+                List<Runnable> list = null;
+                List<Runnable> writeTasks = null;
                 synchronized (this) {
                     if (!mConnectTasks.isEmpty()) {
-                        for (Runnable connectTask : mConnectTasks) {
-                            connectTask.run();
-
-                        }
-                        mConnectTasks.clear();
+                        list = new ArrayList<>();
+                        list.addAll(mConnectTasks);
                     }
                     if (!mWriteTasks.isEmpty()) {
-                        for (Runnable writeTask : mWriteTasks) {
-                            writeTask.run();
+                        writeTasks = new ArrayList<>();
+                        writeTasks.addAll(mWriteTasks);
+                    }
 
-                        }
-                        mWriteTasks.clear();
+                }
+                if (list != null && !list.isEmpty()) {
+                    for (Runnable connectTask : list) {
+                        connectTask.run();
+
+                    }
+
+                }
+                if (writeTasks != null && !writeTasks.isEmpty()) {
+                    for (Runnable writeTask : writeTasks) {
+                        writeTask.run();
+
                     }
                 }
+                synchronized (this) {
+                    if (list != null) {
+                        mConnectTasks.removeAll(list);
+                    }
+                    if (writeTasks != null) {
+                        mWriteTasks.removeAll(writeTasks);
+                    }
+                }
+
                 while (keyIterator.hasNext()) {
                     SelectionKey key = (SelectionKey) keyIterator.next();
                     SelectableChannel selectableChannel = key.channel();

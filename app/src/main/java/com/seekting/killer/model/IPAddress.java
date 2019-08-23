@@ -1,5 +1,7 @@
 package com.seekting.killer.model;
 
+import android.text.TextUtils;
+
 import com.seekting.killer.App;
 import com.seekting.killer.BR;
 
@@ -14,10 +16,28 @@ public class IPAddress extends BaseObservable implements Serializable {
     private String ip3 = "31";
     private String ip4 = "163";
     private String port = "60000";
+    private String shortString = "";
+    private String ip;
+
 
     @Bindable
     public String getShortString() {
         return shortString;
+    }
+
+    public boolean verify() {
+        if (!shortString.contains(":")) {
+            return false;
+        }
+        String[] split = shortString.split(":");
+        if (split.length != 2) {
+            return false;
+        }
+        ip = split[0];
+        port = split[1];
+
+        return true;
+
     }
 
     public void setShortString(String shortString) {
@@ -25,7 +45,6 @@ public class IPAddress extends BaseObservable implements Serializable {
         notifyPropertyChanged(BR.shortString);
     }
 
-    private String shortString = "";
 
     @Bindable
     public String getIp1() {
@@ -95,6 +114,9 @@ public class IPAddress extends BaseObservable implements Serializable {
     }
 
     public String getIP() {
+        if (!TextUtils.isEmpty(ip)) {
+            return ip;
+        }
         return ip1 + "." + ip2 + "." + ip3 + "." + ip4;
 
     }
