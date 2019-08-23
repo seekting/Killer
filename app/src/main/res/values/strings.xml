@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">导控终端</string>
-    <string name="daokong_control">导控指定</string>
-    <string name="caiding_control">裁定指定</string>
+    <string name="daokong_control">导控指令</string>
+    <string name="caiding_control">裁定指令</string>
     <string name="data_update">数据采集</string>
     <string name="data_connect">数据通讯</string>
     <string name="input_ip_hint">IP地址</string>
