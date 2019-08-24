@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.seekting.ConnectManager;
 import com.seekting.killer.databinding.BarsActivityBinding;
 import com.seekting.killer.model.Bar;
+import com.seekting.killer.model.BarControl;
 import com.seekting.killer.model.Control;
 
 import java.util.ArrayList;
@@ -94,13 +95,19 @@ public class BarsControlActivity extends AppCompatActivity implements ConnectMan
         if (people.isEmpty()) {
             return;
         }
-        Control control = new Control();
-        control.setAction(action);
-        control.setType(Control.TYPE_BAR);
-        control.setIds(people);
+        BarControl barControl = new BarControl();
+        barControl.setBar(people.get(0));
+        barControl.setType(action);
         Gson gson = new Gson();
-        String str = gson.toJson(control);
+        String str = gson.toJson(barControl);
         mConnectManager.write(str);
+//        Control control = new Control();
+//        control.setAction(action);
+//        control.setType(Control.TYPE_BAR);
+//        control.setIds(people);
+//        Gson gson = new Gson();
+//        String str = gson.toJson(control);
+//        mConnectManager.write(str);
     }
 
 
@@ -137,10 +144,12 @@ public class BarsControlActivity extends AppCompatActivity implements ConnectMan
         @Override
         public void onClick(View v) {
             Bar bar = (Bar) v.getTag();
+
             if (mSelected.contains(bar.getId())) {
                 mSelected.remove(bar.getId());
 
             } else {
+                mSelected.clear();
                 mSelected.add(bar.getId());
 
             }

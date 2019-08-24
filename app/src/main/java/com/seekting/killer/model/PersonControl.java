@@ -1,7 +1,11 @@
 package com.seekting.killer.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PersonControl{
+	@SerializedName("person")
 	private String person;
+	@SerializedName("type")
 	private String type;
 
 	public void setPerson(String person){

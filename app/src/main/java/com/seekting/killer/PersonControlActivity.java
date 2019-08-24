@@ -3,6 +3,7 @@ package com.seekting.killer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.seekting.ConnectManager;
 import com.seekting.killer.databinding.PersonActivityBinding;
 import com.seekting.killer.model.Control;
 import com.seekting.killer.model.Person;
+import com.seekting.killer.model.PersonControl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,13 +91,19 @@ public class PersonControlActivity extends AppCompatActivity implements ConnectM
         if (people.isEmpty()) {
             return;
         }
-        Control control = new Control();
-        control.setAction(action);
-        control.setType(Control.TYPE_PERSON);
-        control.setIds(people);
+        PersonControl personControl = new PersonControl();
+        personControl.setType(action);
+        personControl.setPerson(people.get(0));
         Gson gson = new Gson();
-        String str = gson.toJson(control);
+        String str = gson.toJson(personControl);
         mConnectManager.write(str);
+//        Control control = new Control();
+//        control.setAction(action);
+//        control.setType(Control.TYPE_PERSON);
+//        control.setIds(people);
+//        Gson gson = new Gson();
+//        String str = gson.toJson(control);
+//        mConnectManager.write(str);
     }
 
 
@@ -103,6 +111,7 @@ public class PersonControlActivity extends AppCompatActivity implements ConnectM
     public void onPersonUpdate(List<Person> list) {
         mPersons.clear();
         mPersons.addAll(list);
+        Log.d("seekting","PersonControlActivity.onPersonUpdate()"+mPersons.size());
         mMyAdapter.notifyDataSetChanged();
 
     }
@@ -137,6 +146,7 @@ public class PersonControlActivity extends AppCompatActivity implements ConnectM
                 mSelected.remove(person.getId());
 
             } else {
+                mSelected.clear();
                 mSelected.add(person.getId());
 
             }

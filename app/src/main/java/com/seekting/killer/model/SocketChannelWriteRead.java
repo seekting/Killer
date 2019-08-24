@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 public class SocketChannelWriteRead {
+    public static final int CAPACITY = 1024 * 4;
     private static ThreadLocal<ByteBuffer> sByteBufferThreadLocal = new InheritableThreadLocal<>();
     private SocketChannel mSocketChannel;
     private String remoteAddress;
@@ -39,7 +40,7 @@ public class SocketChannelWriteRead {
     public static ByteBuffer obtain() {
         ByteBuffer byteBuffer = sByteBufferThreadLocal.get();
         if (byteBuffer == null) {
-            byteBuffer = ByteBuffer.allocate(1024);
+            byteBuffer = ByteBuffer.allocate(CAPACITY);
             sByteBufferThreadLocal.set(byteBuffer);
         }
 

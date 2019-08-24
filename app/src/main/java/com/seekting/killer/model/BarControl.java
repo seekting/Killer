@@ -1,7 +1,11 @@
 package com.seekting.killer.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class BarControl{
+	@SerializedName("bar")
 	private String bar;
+	@SerializedName("type")
 	private String type;
 
 	public void setBar(String bar){

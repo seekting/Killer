@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.seekting.killer.databinding.IndexActivityBinding;
 import com.seekting.killer.view.ControlFrameLayout;
+import com.seekting.utils.AppVersionUtils;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         mIndexActivityBinding = DataBindingUtil.setContentView(this, R.layout.index_activity);
+        mIndexActivityBinding.version.setText("v" + AppVersionUtils.packageName(this));
         barsLayout = (ControlFrameLayout) mIndexActivityBinding.bars;
         personLayout = (ControlFrameLayout) mIndexActivityBinding.persons;
         dataLayout = (ControlFrameLayout) mIndexActivityBinding.data;

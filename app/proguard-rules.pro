@@ -21,6 +21,8 @@
 #-renamesourcefileattribute SourceFile
 -keep class com.wang.avi.** { *; }
 -keep class com.wang.avi.indicators.** { *; }
+#-keep class com.seekting.killer.model.BarControl** { *; }
+#-keep class com.seekting.killer.model.PersonControl** { *; }
 
 # keep classes for @JavaScriptInterface
 -renamesourcefileattribute SourceFile
