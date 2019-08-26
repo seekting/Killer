@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.seekting.common.DialogUtils;
 import com.seekting.killer.R;
 
 import androidx.appcompat.app.AlertDialog;

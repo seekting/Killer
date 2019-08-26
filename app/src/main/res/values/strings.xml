@@ -12,6 +12,7 @@
     <string name="ip_address">ip地址:</string>
     <string name="cancel">取消</string>
     <string name="ok">确认</string>
+    <string name="complete">完成</string>
 
 
     <string name="person_control_die">违规裁死</string>

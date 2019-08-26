@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.seekting.ConnectManager;
+import com.seekting.common.DialogUtils;
+import com.seekting.common.FastClickUtils;
 import com.seekting.common.ToastUtils;
 import com.seekting.killer.databinding.Connect1ActivityBinding;
 import com.seekting.killer.model.IPAddress;
 import com.seekting.killer.model.IPAddressConnector;
 import com.seekting.killer.model.SocketChannelWriteRead;
-import com.seekting.utils.DialogUtils;
-import com.seekting.utils.FastClickUtils;
 import com.seekting.utils.ProgressUtils;
 
 import androidx.annotation.Nullable;

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+
+    <com.wonderkiln.camerakit.CameraView
+        android:id="@+id/camera"
+        xmlns:camerakit="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        camerakit:ckCropOutput="true"
+        camerakit:ckFacing="back"
+        camerakit:ckFlash="off"
+        camerakit:ckFocus="continuous"
+        camerakit:ckJpegQuality="100"
+        camerakit:ckMethod="standard"
+        camerakit:ckPermissions="strict"
+        camerakit:ckVideoQuality="max480p"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <VideoView
+            android:id="@+id/video_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/record_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/margin_32"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/record_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toLeftOf="@+id/record_button"
+            android:onClick="onBackClick"
+            android:rotation="270"
+            android:src="@mipmap/back_arrow"
+            android:tint="#ffffff"
+            android:tintMode="src_in"
+            />
+
+
+        <com.seekting.killer.view.CircleButtonView
+            android:id="@+id/record_button"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerHorizontal="true"
+            app:maxTime="5"
+            app:minTime="1"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/complete_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/margin_32"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/complete_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/complete_emptyView"
+            android:onClick="onCompleteBackClick"
+            android:rotation="270"
+            android:src="@mipmap/back_arrow"
+            android:tint="#ffffff"
+            android:tintMode="src_in"
+            />
+
+
+        <View
+            android:id="@+id/complete_emptyView"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/complete_btn"
+            style="@style/ios_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/complete_emptyView"
+            android:onClick="onCompleteOkClick"
+            android:text="@string/complete"
+            />
+    </RelativeLayout>
+
+</FrameLayout>

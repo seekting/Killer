@@ -1,4 +1,4 @@
-package com.seekting.utils;
+package com.seekting.common;
 
 import android.app.Activity;
 import android.app.Dialog;

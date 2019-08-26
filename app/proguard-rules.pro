@@ -165,3 +165,8 @@
 -dontwarn com.google.android.material.**
 -dontnote com.google.android.material.**
 -dontwarn androidx.**
+
+-dontwarn com.google.android.gms.**
+-keepclasseswithmembers class com.camerakit.preview.CameraSurfaceView {
+    native <methods>;
+}

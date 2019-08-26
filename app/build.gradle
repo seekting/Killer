@@ -63,7 +63,7 @@ dependencies {
     api project(":model")
     api project(":android-common")
     api project(":thirdparty-pack")
-
+    implementation  'com.wonderkiln:camerakit:0.13.5'
 
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test:runner:$androidx_test_runner_version"

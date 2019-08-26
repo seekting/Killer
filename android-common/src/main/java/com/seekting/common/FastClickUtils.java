@@ -1,4 +1,4 @@
-package com.seekting.utils;
+package com.seekting.common;
 
 public class FastClickUtils {
 

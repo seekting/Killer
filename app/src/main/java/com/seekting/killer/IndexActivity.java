@@ -3,9 +3,9 @@ package com.seekting.killer;
 import android.os.Bundle;
 import android.view.View;
 
+import com.seekting.common.APKVersionCodeUtils;
 import com.seekting.killer.databinding.IndexActivityBinding;
 import com.seekting.killer.view.ControlFrameLayout;
-import com.seekting.utils.AppVersionUtils;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         mIndexActivityBinding = DataBindingUtil.setContentView(this, R.layout.index_activity);
-        mIndexActivityBinding.version.setText("v" + AppVersionUtils.packageName(this));
+        mIndexActivityBinding.version.setText("v" + APKVersionCodeUtils.getVerName(this));
         barsLayout = (ControlFrameLayout) mIndexActivityBinding.bars;
         personLayout = (ControlFrameLayout) mIndexActivityBinding.persons;
         dataLayout = (ControlFrameLayout) mIndexActivityBinding.data;
@@ -48,6 +48,7 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
             Connect1Activity.start(this);
 
         } else if (v == dataLayout) {
+            MediaUpLoadActivity.start(this);
         } else if (v == personLayout) {
             PersonControlActivity.start(this);
 
