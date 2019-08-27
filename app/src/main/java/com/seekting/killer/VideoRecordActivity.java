@@ -25,7 +25,7 @@ import java.io.IOException;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MediaUpLoadActivity extends AppCompatActivity {
+public class VideoRecordActivity extends AppCompatActivity {
     private com.wonderkiln.camerakit.CameraView cameraKitView;
     private CircleButtonView mCircleButtonView;
     private View back;
@@ -42,7 +42,7 @@ public class MediaUpLoadActivity extends AppCompatActivity {
     private CameraKitEventListener mCameraKitEventListener;
 
     public static void start(Context context) {
-        context.startActivity(new Intent(context, MediaUpLoadActivity.class));
+        context.startActivity(new Intent(context, VideoRecordActivity.class));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MediaUpLoadActivity extends AppCompatActivity {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
                 mediaPlayer.setVideoScalingMode(MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT);
-                Log.d("seekting", "MediaUpLoadActivity.onPrepared()" + mVideoView.getMeasuredHeight());
+                Log.d("seekting", "VideoRecordActivity.onPrepared()" + mVideoView.getMeasuredHeight());
             }
         });
 
@@ -72,13 +72,13 @@ public class MediaUpLoadActivity extends AppCompatActivity {
         mCircleButtonView.setOnLongClickListener(new CircleButtonView.OnLongClickListener() {
             @Override
             public void onLongClick() {
-                Log.d("seekting", "MediaUpLoadActivity.onLongClick()");
+                Log.d("seekting", "VideoRecordActivity.onLongClick()");
                 onVideoStartClick(mCircleButtonView);
             }
 
             @Override
             public void onNoMinRecord(int currentTime) {
-                Log.d("seekting", "MediaUpLoadActivity.onNoMinRecord()currentTime=" + currentTime + ",");
+                Log.d("seekting", "VideoRecordActivity.onNoMinRecord()currentTime=" + currentTime + ",");
                 cancelVideo(mCircleButtonView);
 
             }
@@ -86,7 +86,7 @@ public class MediaUpLoadActivity extends AppCompatActivity {
             @Override
             public void onRecordFinishedListener() {
 
-                Log.d("seekting", "MediaUpLoadActivity.onRecordFinishedListener()");
+                Log.d("seekting", "VideoRecordActivity.onRecordFinishedListener()");
                 onVideoStopClick(mCircleButtonView);
             }
         });
@@ -95,13 +95,13 @@ public class MediaUpLoadActivity extends AppCompatActivity {
             @Override
             public void onImage(CameraKitImage image) {
                 super.onImage(image);
-                Log.d("seekting", "MediaUpLoadActivity.onImage()image=" + image + ",");
+                Log.d("seekting", "VideoRecordActivity.onImage()image=" + image + ",");
             }
 
             @Override
             public void onVideo(CameraKitVideo video) {
                 super.onVideo(video);
-                Log.d("seekting", "MediaUpLoadActivity.onVideo()video=" + video + ",");
+                Log.d("seekting", "VideoRecordActivity.onVideo()video=" + video + ",");
                 cameraKitView.setVisibility(View.GONE);
                 mVideoView.setVisibility(View.VISIBLE);
                 File file = new File(getExternalMediaDirs()[0], "record.mp4");
@@ -111,11 +111,11 @@ public class MediaUpLoadActivity extends AppCompatActivity {
             }
 
             public void onEvent(CameraKitEvent event) {
-//                Log.d("seekting", "MediaUpLoadActivity.onEvent()event=" + event + ",");
+//                Log.d("seekting", "VideoRecordActivity.onEvent()event=" + event + ",");
             }
 
             public void onError(CameraKitError error) {
-                Log.w("seekting", "MediaUpLoadActivity.onError()error=", error.getException());
+                Log.w("seekting", "VideoRecordActivity.onError()error=", error.getException());
             }
 
         };
@@ -163,7 +163,7 @@ public class MediaUpLoadActivity extends AppCompatActivity {
     }
 
     private void startRecord() {
-        Log.d("seekting", "MediaUpLoadActivity.onVideoStartClick()" + cameraKitView.getMeasuredHeight());
+        Log.d("seekting", "VideoRecordActivity.onVideoStartClick()" + cameraKitView.getMeasuredHeight());
         File file = new File(getExternalMediaDirs()[0], "record.mp4");
         if (file.exists()) {
             file.delete();
@@ -202,10 +202,6 @@ public class MediaUpLoadActivity extends AppCompatActivity {
 //        cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    public void onImageClick(View v) {
-        cameraKitView.captureImage();
-    }
-
     public void onVideoStartClick(View v) {
 
 
@@ -214,14 +210,14 @@ public class MediaUpLoadActivity extends AppCompatActivity {
     }
 
     public void onVideoStopClick(View v) {
-        Log.d("seekting", "MediaUpLoadActivity.onVideoStopClick()");
+        Log.d("seekting", "VideoRecordActivity.onVideoStopClick()");
         setStage(Stage.Recorded);
 
 
     }
 
     public void cancelVideo(View v) {
-        Log.d("seekting", "MediaUpLoadActivity.cancelVideo()");
+        Log.d("seekting", "VideoRecordActivity.cancelVideo()");
         cameraKitView.stopVideo();
 
     }

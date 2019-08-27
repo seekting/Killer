@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.seekting.killer.DataActivity"/>
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="@dimen/margin"
+            android:src="@mipmap/back_arrow"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:text="@string/data_update"
+            android:textColor="#1f1f1f"
+            android:textSize="28sp"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin">
+
+            <ImageView
+                android:id="@+id/data_video"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:foreground="@drawable/control_item_selector"
+                android:onClick="@{activity::onDataVideoClick}"
+                android:src="@mipmap/tupian2"
+                app:layout_constraintBottom_toTopOf="@+id/data_sound"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/data_img"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.45"
+                />
+
+            <ImageView
+                android:id="@+id/data_img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:foreground="@drawable/control_item_selector"
+                android:onClick="@{activity::onDataImgClick}"
+                android:src="@mipmap/tupian2"
+                app:layout_constraintBottom_toTopOf="@+id/data_location"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintLeft_toRightOf="@+id/data_video"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.45"
+                />
+
+            <ImageView
+                android:id="@+id/data_sound"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin"
+                android:foreground="@drawable/control_item_selector"
+                android:onClick="@{activity::onDataSoundClick}"
+                android:src="@mipmap/shenyin2"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/data_location"
+                app:layout_constraintTop_toBottomOf="@+id/data_video"
+                app:layout_constraintWidth_percent="0.45"
+
+                />
+
+            <ImageView
+                android:id="@+id/data_location"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin"
+                android:foreground="@drawable/control_item_selector"
+                android:onClick="@{activity::onDataLocationClick}"
+                android:src="@mipmap/dingwei2"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintLeft_toRightOf="@+id/data_sound"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/data_img"
+                app:layout_constraintWidth_percent="0.45"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+</layout>

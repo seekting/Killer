@@ -43,12 +43,10 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if (v == barsLayout) {
             BarsControlActivity.start(this);
-
         } else if (v == connectLayout) {
             Connect1Activity.start(this);
-
         } else if (v == dataLayout) {
-            MediaUpLoadActivity.start(this);
+            DataActivity.start(this);
         } else if (v == personLayout) {
             PersonControlActivity.start(this);
 

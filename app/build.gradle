@@ -35,6 +35,7 @@ android {
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [
+                    providerSuffix: '',
                     //这里也是在AndroidManifest.xml中配置的app图标，同样在这里写了了不同的资源文件，从而实现了动态配置
                     app_icon: "@mipmap/daokong",
 
@@ -45,6 +46,7 @@ android {
             minifyEnabled false
             shrinkResources false
             manifestPlaceholders = [
+                    providerSuffix: '.debug',
                     //这里也是在AndroidManifest.xml中配置的app图标，同样在这里写了了不同的资源文件，从而实现了动态配置
                     app_icon: "@mipmap/ic_launcher",
 
