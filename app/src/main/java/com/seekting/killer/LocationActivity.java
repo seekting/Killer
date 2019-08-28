@@ -5,27 +5,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.seekting.common.DialogUtils;
 import com.seekting.common.ToastUtils;
-import com.seekting.utils.GPSUtils;
+import com.seekting.killer.databinding.LocationActivityBinding;
+import com.seekting.utils.LocationManager;
 import com.seekting.utils.PermissionUtil;
 import com.seekting.utils.ProgressUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
-public class LocationActivity extends AppCompatActivity {
+public class LocationActivity extends AppCompatActivity implements LocationManager.Listener, LocationManager.LocationUpdateListener {
 
     public static final int REUQESTCODE = 1;
-    private Location mLocation;
     private TextView mTextView;
     private boolean doLocation = false;
-    private GPSUtils.OnLocationResultListener mOnLocationResultListener;
     private Dialog mDialog;
+    private LocationActivityBinding mLocationActivityBinding;
+    private LocationManager mLocationManager;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, LocationActivity.class));
@@ -35,25 +38,16 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLocationManager = LocationManager.instance();
+
+        mLocationActivityBinding = DataBindingUtil.setContentView(this, R.layout.location_activity);
+        mLocationActivityBinding.setActivity(this);
+
+        mLocationManager.setListener(this);
+        mLocationManager.setLocationUpdateListener(this);
         mTextView = new TextView(this);
-        setContentView(mTextView);
 
-        mOnLocationResultListener = new GPSUtils.OnLocationResultListener() {
-            @Override
-            public void onLocationResult(Location location) {
-                Log.d("seekting", "LocationActivity.onLocationResult()" + location, new NullPointerException());
 
-                mTextView.setText(location.toString());
-                DialogUtils.dismissDialog(mDialog);
-            }
-
-            @Override
-            public void OnLocationChange(Location location) {
-                Log.d("seekting", "LocationActivity.OnLocationChange()" + location, new NullPointerException());
-                mTextView.setText(location.toString());
-                DialogUtils.dismissDialog(mDialog);
-            }
-        };
         boolean needRequest = PermissionUtil.checkNeedRequestPermissions(
                 this, PermissionUtil.LOCATION_PERMISSIONS, REUQESTCODE);
         if (needRequest) {
@@ -64,9 +58,12 @@ public class LocationActivity extends AppCompatActivity {
 
     private void doLocation() {
 
+        mLocationManager.recordLocation(true, this);
+        mLocationManager.setListener(this);
+        setLocationText(mLocationManager.getLastKnownLocation());
         mDialog = ProgressUtils.showProgress(this);
         doLocation = true;
-        GPSUtils.getInstance(this).getLngAndLat(mOnLocationResultListener);
+
 
     }
 
@@ -108,7 +105,53 @@ public class LocationActivity extends AppCompatActivity {
     private void destroy() {
         if (doLocation) {
             DialogUtils.dismissDialog(mDialog);
-            GPSUtils.getInstance(this).removeListener();
+            mLocationManager.unsetListener(this);
+            mLocationManager.setLocationUpdateListener(null);
+            mLocationManager.recordLocation(false, this);
         }
+    }
+
+    @WorkerThread
+    @Override
+    public void showGpsOnScreenIndicator(boolean hasSignal) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mLocationActivityBinding.gpsImg.setVisibility(hasSignal ? View.VISIBLE : View.INVISIBLE);
+            }
+        });
+
+    }
+
+    private void setLocationText(Location location) {
+        if (location != null) {
+            DialogUtils.dismissDialog(mDialog);
+            String text = location.toString();
+            mLocationActivityBinding.locationText.setText(text);
+        }
+    }
+
+    @WorkerThread
+    @Override
+    public void hideGpsOnScreenIndicator() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mLocationActivityBinding.gpsImg.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+    @WorkerThread
+    @Override
+    public void onLocationUpdate(Location location) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                setLocationText(location);
+            }
+        });
+
     }
 }

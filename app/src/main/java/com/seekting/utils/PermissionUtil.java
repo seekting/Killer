@@ -18,6 +18,10 @@ public class PermissionUtil {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
     };
+    public static final String[] VIDEO_RECORD_PERMISSIONS = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO
+    };
     public static final String[] CAMERA = {"android.permission.CAMERA"};
 
 
@@ -54,8 +58,13 @@ public class PermissionUtil {
         return checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
-    public static boolean hasLocationPermissions(Activity activity) {
-        return checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) &&
-                checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION);
+    public static boolean hasLocationPermissions(Context context) {
+        return checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) &&
+                checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION);
+    }
+
+    public static boolean hasVideoRecordPermissions(Context context) {
+        return checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) &&
+                checkSelfPermission(context, Manifest.permission.CAMERA);
     }
 }

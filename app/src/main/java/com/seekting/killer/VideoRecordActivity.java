@@ -12,6 +12,7 @@ import android.widget.VideoView;
 
 import com.seekting.killer.view.CircleButtonView;
 import com.seekting.utils.OkHttpCallBackWrap;
+import com.seekting.utils.PermissionUtil;
 import com.wonderkiln.camerakit.CameraKitError;
 import com.wonderkiln.camerakit.CameraKitEvent;
 import com.wonderkiln.camerakit.CameraKitEventListener;
@@ -122,7 +123,9 @@ public class VideoRecordActivity extends AppCompatActivity {
 
         cameraKitView.addCameraKitListener(mCameraKitEventListener);
 
-        setStage(Stage.PrePare);
+        if (PermissionUtil.hasVideoRecordPermissions(this)) {
+            setStage(Stage.PrePare);
+        }
     }
 
     public void setStage(Stage stage) {
@@ -199,6 +202,11 @@ public class VideoRecordActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (PermissionUtil.hasVideoRecordPermissions(this)) {
+            setStage(Stage.PrePare);
+        } else {
+            finish();
+        }
 //        cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
