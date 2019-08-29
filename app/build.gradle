@@ -1,3 +1,5 @@
+import java.nio.channels.FileChannel
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -37,7 +39,7 @@ android {
             manifestPlaceholders = [
                     providerSuffix: '',
                     //这里也是在AndroidManifest.xml中配置的app图标，同样在这里写了了不同的资源文件，从而实现了动态配置
-                    app_icon: "@mipmap/daokong",
+                    app_icon      : "@mipmap/daokong",
 
             ]
         }
@@ -48,7 +50,7 @@ android {
             manifestPlaceholders = [
                     providerSuffix: '.debug',
                     //这里也是在AndroidManifest.xml中配置的app图标，同样在这里写了了不同的资源文件，从而实现了动态配置
-                    app_icon: "@mipmap/ic_launcher",
+                    app_icon      : "@mipmap/ic_launcher",
 
             ]
         }
@@ -59,13 +61,55 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+def fileChannelCopy(s, t) {
+    FileInputStream fi = null;
+    FileOutputStream fo = null;
+    try {
+        fi = new FileInputStream(s);
+        fo = new FileOutputStream(t);
+        FileChannel input = fi.getChannel();//得到对应的文件通道
+        FileChannel out = fo.getChannel();//得到对应的文件通道
+        input.transferTo(0, input.size(), out);//连接两个通道，并且从in通道读取，然后写入out通道
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (fo != null) fo.close();
+            if (fi != null) fi.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
+}
+afterEvaluate {
+    Task task = tasks.findByName("assembleRelease")
+    if (task != null) {
+        task.doLast {
+            logger.quiet('quiet 日志')
+            logger.error('error 日志')
+            logger.warn('warn 日志')
+//            logger.lifecycle('lifecycle 日志')
+//            logger.info('info 日志')
+//            logger.debug('debug 日志')
+//            logger.info("last!")
+            File file = new File('app/build/outputs/apk/release/app-release.apk')
+//            File file = file('build/outputs/apk/release/output.json')
+
+            File newFile = new File("release/v${versionName}-app-release.apk")
+            fileChannelCopy(file, newFile)
+
+            println(file.absolutePath)
+        }
+    }
+
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(":model")
     api project(":android-common")
     api project(":thirdparty-pack")
-    implementation  'com.wonderkiln:camerakit:0.13.5'
+    implementation 'com.wonderkiln:camerakit:0.13.5'
 
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test:runner:$androidx_test_runner_version"
