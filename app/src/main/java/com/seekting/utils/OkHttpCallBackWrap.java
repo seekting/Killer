@@ -18,7 +18,7 @@ public class OkHttpCallBackWrap {
 
     private static OkHttpClient sOkHttpClient;
 
-    public static void post(String url, File file) throws IOException {
+    public static void post(String url, File file, Callback callback) throws IOException {
         RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -37,7 +37,11 @@ public class OkHttpCallBackWrap {
                     .writeTimeout(150, TimeUnit.SECONDS)
                     .build();
         }
-        sOkHttpClient.newCall(request).enqueue(new Callback() {
+        sOkHttpClient.newCall(request).enqueue(callback);
+    }
+
+    public static void post(String url, File file) throws IOException {
+        Callback callback = new Callback() {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -51,6 +55,8 @@ public class OkHttpCallBackWrap {
 
             }
 
-        });
+        };
+        post(url, file, callback);
+
     }
 }

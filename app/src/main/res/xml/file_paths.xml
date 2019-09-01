@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-path name="my_image" path="."/>
-</paths>
+<!--<paths xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+    <!--<files-path  path="." name="root" />-->
+    <!--<files-path  path="images/" name="my_images" />-->
+    <!--<files-path  path="audios/" name="my_audios" />-->
+    <!--<files-path  path="videos/" name="my_videos" />-->
+<!--</paths>-->
+<resources>
+    <paths>
+        <root-path path="" name="camera_photos" />
+
+    </paths>
+</resources>

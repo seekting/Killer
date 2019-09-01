@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.VideoView;
 
+import com.seekting.MediaUtils;
 import com.seekting.killer.view.CircleButtonView;
 import com.seekting.utils.OkHttpCallBackWrap;
 import com.seekting.utils.PermissionUtil;
@@ -35,6 +36,7 @@ public class VideoRecordActivity extends AppCompatActivity {
 
 
     private Stage mStage;
+    private File mFile;
 
     enum Stage {
         PrePare, Recording, Recorded
@@ -105,8 +107,7 @@ public class VideoRecordActivity extends AppCompatActivity {
                 Log.d("seekting", "VideoRecordActivity.onVideo()video=" + video + ",");
                 cameraKitView.setVisibility(View.GONE);
                 mVideoView.setVisibility(View.VISIBLE);
-                File file = new File(getExternalMediaDirs()[0], "record.mp4");
-                mVideoView.setVideoPath(file.getAbsolutePath());
+                mVideoView.setVideoPath(mFile.getAbsolutePath());
                 mVideoView.start();
 
             }
@@ -165,14 +166,14 @@ public class VideoRecordActivity extends AppCompatActivity {
 
     }
 
+    private File getOutFile() {
+        return MediaUtils.createVideoFile();
+    }
+
     private void startRecord() {
-        Log.d("seekting", "VideoRecordActivity.onVideoStartClick()" + cameraKitView.getMeasuredHeight());
-        File file = new File(getExternalMediaDirs()[0], "record.mp4");
-        if (file.exists()) {
-            file.delete();
-        }
-        Log.d("seekting", "MediaUpLoadA ctivity.onVideoStartClick()" + file);
-        cameraKitView.captureVideo(file);
+        mFile = getOutFile();
+        Log.d("seekting", "MediaUpLoadA ctivity.onVideoStartClick()" + mFile);
+        cameraKitView.captureVideo(mFile);
     }
 
 

@@ -22,7 +22,12 @@ public class PermissionUtil {
             Manifest.permission.CAMERA,
             Manifest.permission.RECORD_AUDIO
     };
-    public static final String[] CAMERA = {"android.permission.CAMERA"};
+    public static final String[] CAMERA = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+
+    };
 
 
     public static boolean checkNeedRequestPermissions(
@@ -55,7 +60,9 @@ public class PermissionUtil {
     }
 
     public static boolean checkStoragePermission(Activity activity) {
-        return checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        return checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                && checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE)
+                ;
     }
 
     public static boolean hasLocationPermissions(Context context) {

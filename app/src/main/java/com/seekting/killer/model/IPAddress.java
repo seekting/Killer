@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.seekting.killer.App;
 import com.seekting.killer.BR;
+import com.seekting.killer.BuildConfig;
 
 import java.io.Serializable;
 
@@ -11,13 +12,23 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 public class IPAddress extends BaseObservable implements Serializable {
+    private static String debug_ip = null;
+    private static String debug_port = null;
+
+    static {
+        if (BuildConfig.DEBUG) {
+            debug_ip = "192.168.31.163";
+            debug_port = "60000";
+        }
+    }
+
     private String ip1 = "192";
     private String ip2 = "168";
     private String ip3 = "31";
     private String ip4 = "163";
-    private String port = "60000";
+    private String port = debug_port;
     private String shortString = "";
-    private String ip;
+    private String ip = debug_ip;
 
 
     @Bindable
@@ -113,12 +124,24 @@ public class IPAddress extends BaseObservable implements Serializable {
 
     }
 
+
     public String getIP() {
         if (!TextUtils.isEmpty(ip)) {
             return ip;
         }
         return ip1 + "." + ip2 + "." + ip3 + "." + ip4;
 
+    }
+
+    public static String getShortAddress(IPAddress ipAddress) {
+        if (!TextUtils.isEmpty(ipAddress.ip)) {
+            String ip = ipAddress.getIP();
+            String port = TextUtils.isEmpty(ipAddress.getPort()) ? "" : ":" + ipAddress.getPort();
+
+            return "http://" + ip + port;
+
+        }
+        return null;
     }
 
     public static IPAddress read() {
