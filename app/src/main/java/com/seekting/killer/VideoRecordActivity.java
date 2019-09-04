@@ -5,15 +5,20 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.VideoView;
 
 import com.seekting.MediaUtils;
+import com.seekting.common.DialogUtils;
+import com.seekting.common.ToastUtils;
+import com.seekting.killer.model.IPAddress;
 import com.seekting.killer.view.CircleButtonView;
 import com.seekting.utils.OkHttpCallBackWrap;
 import com.seekting.utils.PermissionUtil;
+import com.seekting.utils.ProgressUtils;
 import com.wonderkiln.camerakit.CameraKitError;
 import com.wonderkiln.camerakit.CameraKitEvent;
 import com.wonderkiln.camerakit.CameraKitEventListener;
@@ -25,9 +30,13 @@ import java.io.File;
 import java.io.IOException;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
-public class VideoRecordActivity extends AppCompatActivity {
+public class VideoRecordActivity extends AppCompatActivity implements Callback {
     private com.wonderkiln.camerakit.CameraView cameraKitView;
     private CircleButtonView mCircleButtonView;
     private View back;
@@ -37,6 +46,30 @@ public class VideoRecordActivity extends AppCompatActivity {
 
     private Stage mStage;
     private File mFile;
+    private AlertDialog mDialog;
+
+    @Override
+    public void onFailure(Call call, IOException e) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissDialog(mDialog);
+                ToastUtils.showToast(VideoRecordActivity.this, "上传失败");
+                Log.d("seekting","VideoRecordActivity.run()",e);
+            }
+        });
+    }
+
+    @Override
+    public void onResponse(Call call, Response response) throws IOException {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissDialog(mDialog);
+                ToastUtils.showToast(VideoRecordActivity.this, "上传成功");
+            }
+        });
+    }
 
     enum Stage {
         PrePare, Recording, Recorded
@@ -173,6 +206,7 @@ public class VideoRecordActivity extends AppCompatActivity {
     private void startRecord() {
         mFile = getOutFile();
         Log.d("seekting", "MediaUpLoadA ctivity.onVideoStartClick()" + mFile);
+
         cameraKitView.captureVideo(mFile);
     }
 
@@ -232,13 +266,14 @@ public class VideoRecordActivity extends AppCompatActivity {
     }
 
     public void onBackClick(View v) {
-        String url = "http://10.232.52.250:80";
-        File file = new File(getExternalMediaDirs()[0], "record.mp4");
-        try {
-            OkHttpCallBackWrap.post(url, file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        String url = "http://10.232.52.250:80";
+//        File file = new File(getExternalMediaDirs()[0], "record.mp4");
+//        try {
+//            OkHttpCallBackWrap.post(url, file);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        onBackPressed();
     }
 
     public void onCompleteBackClick(View v) {
@@ -250,7 +285,21 @@ public class VideoRecordActivity extends AppCompatActivity {
         if (mVideoView.isPlaying()) {
             mVideoView.pause();
         }
-        finish();
+        IPAddress ip = IPAddress.read();
+        String str = IPAddress.getShortAddress(ip);
+        if (TextUtils.isEmpty(str)) {
+            ToastUtils.showToast(this, "没有服务器地址");
+            return;
+        }
+
+        String url = str + "/video";
+        try {
+            mDialog = ProgressUtils.showProgress(this);
+
+            OkHttpCallBackWrap.post(url, mFile, this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.seekting.killer.databinding.ConnectActivityBinding;
 import com.seekting.killer.model.IPAddress;
+import com.seekting.utils.PermissionUtil;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class ConnectActivity extends AppCompatActivity {
 
 
     }
+
 
     public void onConnectedClick(View v) {
         KillerActivity.start(this, mIpAddress);

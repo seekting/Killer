@@ -15,7 +15,7 @@ public class MediaUtils {
         String timeStamp = SIMPLE_DATE_FORMAT.format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File publicDirectory = Environment.getExternalStoragePublicDirectory
-                (Environment.DIRECTORY_PICTURES);
+                (Environment.DIRECTORY_DCIM);
         File image = File.createTempFile(
                 imageFileName,  /* 文件名前缀 */
                 ".jpg",         /* 文件名后缀 */
@@ -30,7 +30,7 @@ public class MediaUtils {
         String timeStamp = SIMPLE_DATE_FORMAT.format(new Date());
         String imageFileName = "Video_" + timeStamp;
         File publicDirectory = Environment.getExternalStoragePublicDirectory
-                (Environment.DIRECTORY_PICTURES);
+                (Environment.DIRECTORY_DCIM);
         File file = new File(publicDirectory, imageFileName + ".mp4");
 //        File image = File.createTempFile(
 //                imageFileName,  /* 文件名前缀 */

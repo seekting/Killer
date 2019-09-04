@@ -52,7 +52,7 @@ public class TakePhotoActivity extends AppCompatActivity implements Callback {
         getSupportActionBar().hide();
         mTakePhotoActivityBinding = DataBindingUtil.setContentView(this, R.layout.take_photo_activity);
         mTakePhotoActivityBinding.setActivity(this);
-        boolean isNeedRequest = PermissionUtil.checkNeedRequestPermissions(this, PermissionUtil.CAMERA, REQUEST_IMAGE_CAPTURE);
+        boolean isNeedRequest = PermissionUtil.checkNeedRequestPermissions(this, PermissionUtil.CAMERA_STORAGE, REQUEST_IMAGE_CAPTURE);
         if (isNeedRequest) {
             return;
         }
@@ -188,6 +188,7 @@ public class TakePhotoActivity extends AppCompatActivity implements Callback {
             public void run() {
                 DialogUtils.dismissDialog(mDialog);
                 ToastUtils.showToast(TakePhotoActivity.this, "上传失败");
+                Log.d("seekting","TakePhotoActivity.run()",e);
             }
         });
 

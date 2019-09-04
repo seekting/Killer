@@ -22,7 +22,7 @@ public class PermissionUtil {
             Manifest.permission.CAMERA,
             Manifest.permission.RECORD_AUDIO
     };
-    public static final String[] CAMERA = {
+    public static final String[] CAMERA_STORAGE = {
             Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -62,6 +62,13 @@ public class PermissionUtil {
     public static boolean checkStoragePermission(Activity activity) {
         return checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 && checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE)
+                ;
+    }
+
+    public static boolean checkCameraStoragePermission(Activity activity) {
+        return checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                && checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) &&
+                checkSelfPermission(activity, Manifest.permission.CAMERA)
                 ;
     }
 

@@ -59,4 +59,22 @@ public class OkHttpCallBackWrap {
         post(url, file, callback);
 
     }
+
+    public static void get(String url, Callback callback) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+        if (sOkHttpClient == null) {
+            final okhttp3.OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
+            sOkHttpClient = httpBuilder
+                    //设置超时
+                    .connectTimeout(100, TimeUnit.SECONDS)
+                    .writeTimeout(150, TimeUnit.SECONDS)
+                    .build();
+        }
+        sOkHttpClient.newCall(request).enqueue(callback);
+    }
+
 }
