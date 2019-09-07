@@ -61,6 +61,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
 def fileChannelCopy(s, t) {
     FileInputStream fi = null;
     FileOutputStream fo = null;
@@ -82,6 +83,7 @@ def fileChannelCopy(s, t) {
 
     }
 }
+
 afterEvaluate {
     Task task = tasks.findByName("assembleRelease")
     if (task != null) {
@@ -93,6 +95,9 @@ afterEvaluate {
 //            logger.info('info 日志')
 //            logger.debug('debug 日志')
 //            logger.info("last!")
+            File release = new File("release");
+            release.mkdirs()
+
             File file = new File('app/build/outputs/apk/release/app-release.apk')
 //            File file = file('build/outputs/apk/release/output.json')
 
