@@ -73,3 +73,18 @@ type=1表示人
   "person": "1"//人的id
 }
 ```
+## 数据上传
+
+视频:post请求
+form表单contentType:application/octet-stream
+http://ip:port/video
+图片:post请求
+form 表单contentType:application/octet-stream
+http://ip:port/img
+录音:post请求
+form 表单contentType:application/octet-stream
+http://ip:port/audio
+定位:get请求
+http://ip:port/location?longitude=xxx&latitude=xxx
+
+

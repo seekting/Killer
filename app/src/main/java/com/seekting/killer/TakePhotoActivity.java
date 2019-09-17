@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,11 +19,12 @@ import com.seekting.common.DialogUtils;
 import com.seekting.common.ToastUtils;
 import com.seekting.killer.databinding.TakePhotoActivityBinding;
 import com.seekting.killer.model.IPAddress;
-import com.seekting.utils.OkHttpCallBackWrap;
+import com.seekting.utils.FtpUtils;
 import com.seekting.utils.PermissionUtil;
 import com.seekting.utils.ProgressUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import androidx.annotation.NonNull;
@@ -34,8 +36,10 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class TakePhotoActivity extends AppCompatActivity implements Callback {
+public class TakePhotoActivity extends AppCompatActivity implements Callback, FtpUtils.FtpCallBack {
 
+    //    public static final String WORK_FTP_IMG = "work/ftp/img/";
+    public static final String WORK_FTP_IMG = "ftp/img/";
     private TakePhotoActivityBinding mTakePhotoActivityBinding;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -171,11 +175,16 @@ public class TakePhotoActivity extends AppCompatActivity implements Callback {
             return;
         }
 
-        String url = str + "/img";
         try {
             mDialog = ProgressUtils.showProgress(this);
-
-            OkHttpCallBackWrap.post(url, new File(mCurrentPhotoPath), this);
+            File file = new File(mCurrentPhotoPath);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+                @Override
+                public void run() {
+                    FtpUtils.getInstance().uploadFile(fileInputStream, WORK_FTP_IMG + file.getName(), TakePhotoActivity.this);
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -188,7 +197,7 @@ public class TakePhotoActivity extends AppCompatActivity implements Callback {
             public void run() {
                 DialogUtils.dismissDialog(mDialog);
                 ToastUtils.showToast(TakePhotoActivity.this, "上传失败");
-                Log.d("seekting","TakePhotoActivity.run()",e);
+                Log.d("seekting", "TakePhotoActivity.run()", e);
             }
         });
 
@@ -197,6 +206,30 @@ public class TakePhotoActivity extends AppCompatActivity implements Callback {
     @Override
     public void onResponse(Call call, Response response) throws IOException {
 
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissDialog(mDialog);
+                ToastUtils.showToast(TakePhotoActivity.this, "上传成功");
+            }
+        });
+    }
+
+    @Override
+    public void onUploadFail(String msg) {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissDialog(mDialog);
+                ToastUtils.showToast(TakePhotoActivity.this, msg);
+            }
+        });
+
+    }
+
+    @Override
+    public void onUploadSuc() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,12 +14,16 @@ import com.seekting.common.DialogUtils;
 import com.seekting.common.ToastUtils;
 import com.seekting.killer.databinding.LocationActivityBinding;
 import com.seekting.killer.model.IPAddress;
+import com.seekting.utils.FtpUtils;
 import com.seekting.utils.LocationManager;
-import com.seekting.utils.OkHttpCallBackWrap;
 import com.seekting.utils.PermissionUtil;
 import com.seekting.utils.ProgressUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,9 +34,12 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class LocationActivity extends AppCompatActivity implements LocationManager.Listener, LocationManager.LocationUpdateListener, Callback {
+import static com.seekting.MediaUtils.SIMPLE_DATE_FORMAT;
+
+public class LocationActivity extends AppCompatActivity implements LocationManager.Listener, LocationManager.LocationUpdateListener, Callback, FtpUtils.FtpCallBack {
 
     public static final int REUQESTCODE = 1;
+    private static final String WORK_FTP_LOC = "ftp/location/";
     private boolean doLocation = false;
     private Dialog mDialog;
     private LocationActivityBinding mLocationActivityBinding;
@@ -173,17 +181,32 @@ public class LocationActivity extends AppCompatActivity implements LocationManag
             return;
         }
 
-        String url = str + "/location?longitude="
-                + mLocation.getLongitude()
-                + "&latitude="
-                + mLocation.getLatitude();
-        try {
-            mDialog = ProgressUtils.showProgress(this);
-
-            OkHttpCallBackWrap.get(url, this);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (mLocation == null) {
+            return;
         }
+
+        mDialog = ProgressUtils.showProgress(this);
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+            @Override
+            public void run() {
+                File file = new File(getFilesDir(), "location.txt");
+                FileWriter fileWriter = null;
+                String timeStamp = SIMPLE_DATE_FORMAT.format(new Date());
+                String locname = "Location_" + timeStamp + ".txt";
+                try {
+                    fileWriter = new FileWriter(file);
+                    String loc = mLocation.getLongitude() + ":" + mLocation.getLatitude();
+                    fileWriter.write(loc);
+                    fileWriter.flush();
+                    fileWriter.close();
+                    FileInputStream fileInputStream = new FileInputStream(file);
+                    FtpUtils.getInstance().uploadFile(fileInputStream, WORK_FTP_LOC + locname, LocationActivity.this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     @Override
@@ -200,6 +223,30 @@ public class LocationActivity extends AppCompatActivity implements LocationManag
 
     @Override
     public void onResponse(Call call, Response response) throws IOException {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissDialog(mDialog);
+                ToastUtils.showToast(LocationActivity.this, "上传成功");
+            }
+        });
+    }
+
+    @Override
+    public void onUploadFail(String msg) {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissDialog(mDialog);
+                ToastUtils.showToast(LocationActivity.this, msg);
+            }
+        });
+
+    }
+
+    @Override
+    public void onUploadSuc() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

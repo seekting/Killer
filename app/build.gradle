@@ -111,6 +111,7 @@ afterEvaluate {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     api project(":model")
     api project(":android-common")
     api project(":thirdparty-pack")

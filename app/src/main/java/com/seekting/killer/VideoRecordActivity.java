@@ -3,6 +3,7 @@ package com.seekting.killer;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -16,7 +17,7 @@ import com.seekting.common.DialogUtils;
 import com.seekting.common.ToastUtils;
 import com.seekting.killer.model.IPAddress;
 import com.seekting.killer.view.CircleButtonView;
-import com.seekting.utils.OkHttpCallBackWrap;
+import com.seekting.utils.FtpUtils;
 import com.seekting.utils.PermissionUtil;
 import com.seekting.utils.ProgressUtils;
 import com.wonderkiln.camerakit.CameraKitError;
@@ -27,6 +28,8 @@ import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import androidx.annotation.Nullable;
@@ -36,7 +39,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class VideoRecordActivity extends AppCompatActivity implements Callback {
+public class VideoRecordActivity extends AppCompatActivity implements Callback, FtpUtils.FtpCallBack {
+    private static final String WORK_FTP_VIDEO = "ftp/video/";
     private com.wonderkiln.camerakit.CameraView cameraKitView;
     private CircleButtonView mCircleButtonView;
     private View back;
@@ -55,13 +59,37 @@ public class VideoRecordActivity extends AppCompatActivity implements Callback {
             public void run() {
                 DialogUtils.dismissDialog(mDialog);
                 ToastUtils.showToast(VideoRecordActivity.this, "上传失败");
-                Log.d("seekting","VideoRecordActivity.run()",e);
+                Log.d("seekting", "VideoRecordActivity.run()", e);
             }
         });
     }
 
     @Override
     public void onResponse(Call call, Response response) throws IOException {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissDialog(mDialog);
+                ToastUtils.showToast(VideoRecordActivity.this, "上传成功");
+            }
+        });
+    }
+
+    @Override
+    public void onUploadFail(String msg) {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissDialog(mDialog);
+                ToastUtils.showToast(VideoRecordActivity.this, msg);
+            }
+        });
+
+    }
+
+    @Override
+    public void onUploadSuc() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -293,14 +321,19 @@ public class VideoRecordActivity extends AppCompatActivity implements Callback {
         }
 
         String url = str + "/video";
-        try {
-            mDialog = ProgressUtils.showProgress(this);
-
-            OkHttpCallBackWrap.post(url, mFile, this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        mDialog = ProgressUtils.showProgress(this);
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+            @Override
+            public void run() {
+                FileInputStream fileInputStream = null;
+                try {
+                    fileInputStream = new FileInputStream(mFile);
+                    FtpUtils.getInstance().uploadFile(fileInputStream, WORK_FTP_VIDEO + mFile.getName(), VideoRecordActivity.this);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
