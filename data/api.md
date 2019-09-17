@@ -75,16 +75,11 @@ type=1表示人
 ```
 ## 数据上传
 
-视频:post请求
-form表单contentType:application/octet-stream
-http://ip:port/video
-图片:post请求
-form 表单contentType:application/octet-stream
-http://ip:port/img
-录音:post请求
-form 表单contentType:application/octet-stream
-http://ip:port/audio
-定位:get请求
-http://ip:port/location?longitude=xxx&latitude=xxx
+ftp上传
+ip:socket地址
+端口：21
+用户名:ftp,密码ftp
+需要在ftp根目录创建
+ftp/audio  ftp/img  ftp/location  ftp/video
 
 
