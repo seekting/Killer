@@ -22,6 +22,7 @@
 
 
     <string name="bar_control_up">起靶</string>
+    <string name="bar_control_ask">询问环数</string>
     <string name="bar_control_down">倒靶</string>
     <string name="bar_control_scream">尖叫</string>
     <string name="bar_control_sound">枪声</string>

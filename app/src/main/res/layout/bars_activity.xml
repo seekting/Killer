@@ -40,28 +40,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin"
-            android:weightSum="5">
+            android:weightSum="4">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"/>
+
 
             <Button
                 android:id="@+id/bar_control_up"
                 style="@style/ios_button"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{activity::onUpClick}"
                 android:text="@string/bar_control_up"
                 />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"/>
+
 
             <Button
+                android:layout_weight="1"
                 android:id="@+id/bar_control_down"
                 style="@style/ios_button"
                 android:layout_width="wrap_content"
@@ -70,13 +66,11 @@
                 android:text="@string/bar_control_down"
                 />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"/>
+
 
             <Button
                 android:id="@+id/bar_control_scream"
+                android:layout_weight="1"
                 style="@style/ios_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,12 +78,9 @@
                 android:text="@string/bar_control_scream"
                 />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"/>
 
             <Button
+                android:layout_weight="1"
                 android:id="@+id/bar_control_sound"
                 style="@style/ios_button"
                 android:layout_width="wrap_content"
@@ -98,13 +89,28 @@
                 android:text="@string/bar_control_sound"
                 />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"/>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin"
+            android:weightSum="4">
+
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/bar_control_ask"
+                style="@style/ios_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:onClick="@{activity::onAskClick}"
+                android:text="@string/bar_control_ask"
+                />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

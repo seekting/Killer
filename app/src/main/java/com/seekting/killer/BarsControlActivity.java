@@ -90,6 +90,10 @@ public class BarsControlActivity extends AppCompatActivity implements ConnectMan
         sendAction(action);
     }
 
+    public void onAskClick(View v){
+        String action = Control.BAR_ACTION_ASK;
+        sendAction(action);
+    }
     private void sendAction(String action) {
         List<String> people = getSelectedBars();
         if (people.isEmpty()) {

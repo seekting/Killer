@@ -18,6 +18,7 @@ public class Control implements Serializable {
     public static final String BAR_ACTION_DOWN = "1";
     public static final String BAR_ACTION_SCREAM = "2";
     public static final String BAR_ACTION_SOUND = "3";
+    public static final String BAR_ACTION_ASK = "4";
     @SerializedName("action")
     private String action;
 
