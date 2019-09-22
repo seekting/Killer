@@ -5,15 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.seekting.BaseActivity;
 import com.seekting.killer.databinding.ConnectActivityBinding;
 import com.seekting.killer.model.IPAddress;
-import com.seekting.utils.PermissionUtil;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-public class ConnectActivity extends AppCompatActivity {
+public class ConnectActivity extends BaseActivity {
 
     private ConnectActivityBinding mConnectActivityBinding;
     private IPAddress mIpAddress;

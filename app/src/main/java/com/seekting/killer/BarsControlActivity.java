@@ -10,6 +10,7 @@ import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.seekting.BaseActivity;
 import com.seekting.ConnectManager;
 import com.seekting.killer.databinding.BarsActivityBinding;
 import com.seekting.killer.model.Bar;
@@ -21,12 +22,11 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class BarsControlActivity extends AppCompatActivity implements ConnectManager.BarListener {
+public class BarsControlActivity extends BaseActivity implements ConnectManager.BarListener {
 
     private BarsActivityBinding mBarsActivityBinding;
     private ConnectManager mConnectManager;

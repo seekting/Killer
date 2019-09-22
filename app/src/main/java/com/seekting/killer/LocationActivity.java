@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.seekting.BaseActivity;
 import com.seekting.common.DialogUtils;
 import com.seekting.common.ToastUtils;
 import com.seekting.killer.databinding.LocationActivityBinding;
@@ -28,7 +29,6 @@ import java.util.Date;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -36,7 +36,7 @@ import okhttp3.Response;
 
 import static com.seekting.MediaUtils.SIMPLE_DATE_FORMAT;
 
-public class LocationActivity extends AppCompatActivity implements LocationManager.Listener, LocationManager.LocationUpdateListener, Callback, FtpUtils.FtpCallBack {
+public class LocationActivity extends BaseActivity implements LocationManager.Listener, LocationManager.LocationUpdateListener, Callback, FtpUtils.FtpCallBack {
 
     public static final int REUQESTCODE = 1;
     private static final String WORK_FTP_LOC = "ftp/location/";

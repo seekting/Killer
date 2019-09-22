@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.seekting.BaseActivity;
 import com.seekting.ConnectManager;
 import com.seekting.common.DialogUtils;
 import com.seekting.common.FastClickUtils;
@@ -17,10 +18,9 @@ import com.seekting.killer.model.SocketChannelWriteRead;
 import com.seekting.utils.ProgressUtils;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-public class Connect1Activity extends AppCompatActivity implements IPAddressConnector.ClientConnectListener {
+public class Connect1Activity extends BaseActivity implements IPAddressConnector.ClientConnectListener {
     Connect1ActivityBinding mConnect1ActivityBinding;
     private IPAddress mIPAddress;
     private ConnectManager mConnectManager;

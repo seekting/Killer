@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
+import com.seekting.BaseActivity;
 import com.seekting.common.ToastUtils;
 import com.seekting.killer.databinding.KillerActivityBinding;
 import com.seekting.killer.model.Bar;
@@ -27,10 +28,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-public class KillerActivity extends AppCompatActivity implements IPAddressConnector.ClientConnectListener {
+public class KillerActivity extends BaseActivity implements IPAddressConnector.ClientConnectListener {
     private IPAddressConnector mIpAddressConnector;
     private Dialog mDialog;
     private SocketChannelWriteRead socketChannelWriteRead;

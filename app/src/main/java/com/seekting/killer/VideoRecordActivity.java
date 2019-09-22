@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.VideoView;
 
+import com.seekting.BaseActivity;
 import com.seekting.MediaUtils;
 import com.seekting.common.DialogUtils;
 import com.seekting.common.ToastUtils;
@@ -34,12 +35,11 @@ import java.io.IOException;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class VideoRecordActivity extends AppCompatActivity implements Callback, FtpUtils.FtpCallBack {
+public class VideoRecordActivity extends BaseActivity implements Callback, FtpUtils.FtpCallBack {
     private static final String WORK_FTP_VIDEO = "ftp/video/";
     private com.wonderkiln.camerakit.CameraView cameraKitView;
     private CircleButtonView mCircleButtonView;

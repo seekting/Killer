@@ -3,15 +3,15 @@ package com.seekting.killer;
 import android.os.Bundle;
 import android.view.View;
 
+import com.seekting.BaseActivity;
 import com.seekting.common.APKVersionCodeUtils;
 import com.seekting.killer.databinding.IndexActivityBinding;
 import com.seekting.killer.view.ControlFrameLayout;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-public class IndexActivity extends AppCompatActivity implements View.OnClickListener {
+public class IndexActivity extends BaseActivity implements View.OnClickListener {
     ControlFrameLayout barsLayout, personLayout, dataLayout, connectLayout;
     private IndexActivityBinding mIndexActivityBinding;
 

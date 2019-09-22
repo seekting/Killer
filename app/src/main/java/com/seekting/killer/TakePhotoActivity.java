@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.seekting.BaseActivity;
 import com.seekting.MediaUtils;
 import com.seekting.common.DialogUtils;
 import com.seekting.common.ToastUtils;
@@ -29,14 +30,13 @@ import java.io.IOException;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class TakePhotoActivity extends AppCompatActivity implements Callback, FtpUtils.FtpCallBack {
+public class TakePhotoActivity extends BaseActivity implements Callback, FtpUtils.FtpCallBack {
 
     //    public static final String WORK_FTP_IMG = "work/ftp/img/";
     public static final String WORK_FTP_IMG = "ftp/img/";

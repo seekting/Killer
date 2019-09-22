@@ -5,16 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.seekting.BaseActivity;
 import com.seekting.common.ToastUtils;
 import com.seekting.killer.databinding.DataActivityBinding;
 import com.seekting.utils.PermissionUtil;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-public class DataActivity extends AppCompatActivity {
+public class DataActivity extends BaseActivity {
 
     private DataActivityBinding mDataActivityBinding;
 

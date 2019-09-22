@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.seekting.BaseActivity;
 import com.seekting.MediaUtils;
 import com.seekting.common.DialogUtils;
 import com.seekting.common.ToastUtils;
@@ -29,13 +30,12 @@ import java.util.Date;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class TakeMicRecordActivity extends AppCompatActivity implements Callback, FtpUtils.FtpCallBack {
+public class TakeMicRecordActivity extends BaseActivity implements Callback, FtpUtils.FtpCallBack {
     public static final int REQUEST_RECORDER = 1;
     private static final String WORK_FTP_AUDIO = "ftp/audio/";
     public MediaPlayer mediaPlayer;

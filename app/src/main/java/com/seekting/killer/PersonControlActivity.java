@@ -11,6 +11,7 @@ import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.seekting.BaseActivity;
 import com.seekting.ConnectManager;
 import com.seekting.killer.databinding.PersonActivityBinding;
 import com.seekting.killer.model.Control;
@@ -22,12 +23,11 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PersonControlActivity extends AppCompatActivity implements ConnectManager.PersonListener {
+public class PersonControlActivity extends BaseActivity implements ConnectManager.PersonListener {
 
     private PersonActivityBinding mPersonActivityBinding;
     private ConnectManager mConnectManager;
