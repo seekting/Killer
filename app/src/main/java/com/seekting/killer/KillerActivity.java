@@ -231,4 +231,6 @@ public class KillerActivity extends BaseActivity implements IPAddressConnector.C
         }
         controlBar("1");
     }
+
+
 }

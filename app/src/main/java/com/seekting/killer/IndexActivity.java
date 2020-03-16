@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 public class IndexActivity extends BaseActivity implements View.OnClickListener {
-    ControlFrameLayout barsLayout, personLayout, dataLayout, connectLayout;
+    ControlFrameLayout barsLayout, personLayout, dataLayout, connectLayout, scroeLayout;
     private IndexActivityBinding mIndexActivityBinding;
 
     @Override
@@ -25,17 +25,20 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener 
         personLayout = (ControlFrameLayout) mIndexActivityBinding.persons;
         dataLayout = (ControlFrameLayout) mIndexActivityBinding.data;
         connectLayout = (ControlFrameLayout) mIndexActivityBinding.connect;
+        scroeLayout = (ControlFrameLayout) mIndexActivityBinding.score;
 
         barsLayout.setUi(R.mipmap.daokong, R.string.daokong_control);
         personLayout.setUi(R.mipmap.caiding, R.string.caiding_control);
         dataLayout.setUi(R.mipmap.shujucaiji, R.string.data_update);
         connectLayout.setUi(R.mipmap.shujutongxing, R.string.data_connect);
+        scroeLayout.setUi(R.mipmap.score, R.string.score);
 
 
         barsLayout.setOnClickListener(this);
         personLayout.setOnClickListener(this);
         dataLayout.setOnClickListener(this);
         connectLayout.setOnClickListener(this);
+        scroeLayout.setOnClickListener(this);
 
     }
 
@@ -50,6 +53,8 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener 
         } else if (v == personLayout) {
             PersonControlActivity.start(this);
 
+        } else if (v == scroeLayout) {
+            ScoreActivity.start(this);
         }
 
     }

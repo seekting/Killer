@@ -60,6 +60,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        main {
+            assets.srcDirs = ['assets']
+        }
+    }
 }
 
 def fileChannelCopy(s, t) {
@@ -116,8 +121,8 @@ dependencies {
     api project(":android-common")
     api project(":thirdparty-pack")
     implementation 'com.wonderkiln:camerakit:0.13.5'
-    implementation  'com.umeng.umsdk:analytics:8.0.0'
-    implementation  'com.umeng.umsdk:common:2.0.0'
+    implementation 'com.umeng.umsdk:analytics:8.0.0'
+    implementation 'com.umeng.umsdk:common:2.0.0'
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test:runner:$androidx_test_runner_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_test_ext_junit_version"

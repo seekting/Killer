@@ -83,3 +83,11 @@ ip:socket地址
 ftp/audio  ftp/img  ftp/location  ftp/video
 
 
+##打分
+
+```json {.line-numbers}
+{
+  "score_group": "0",//0表示红方，1表示蓝方
+  "score_id": "1-1-1"//1-1-1表示"值班员接到上级命令超过１分钟才报告” //2-1-1 表示：不能有效利用有利地形
+}
+```

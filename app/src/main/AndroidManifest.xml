@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.seekting.killer"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.seekting.killer">
 
     <application
         android:name=".App"
@@ -42,6 +42,9 @@
             android:name=".Connect1Activity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ScoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".IndexActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
@@ -66,6 +69,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -78,5 +82,5 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 </manifest>
