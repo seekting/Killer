@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.seekting.BaseActivity;
 import com.seekting.killer.databinding.ScoreActivityBinding;
 
+import java.io.IOException;
+
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
@@ -22,5 +24,7 @@ public class ScoreActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mScoreActivityBinding = DataBindingUtil.setContentView(ScoreActivity.this, R.layout.score_activity);
+
+
     }
 }
