@@ -100,15 +100,16 @@ public class ScoreFragment extends Fragment implements View.OnClickListener {
         ScoreItem scoreItem = (ScoreItem) v.getTag();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(R.string.sure_score);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+        ScoreActivity scoreActivity = (ScoreActivity) getActivity();
+        boolean isRed = scoreActivity.mScoreActivityBinding.radioRed.isChecked();
+        String title = String.format(getString(R.string.sure_score), isRed ? getString(R.string.red) : getString(R.string.blue));
+        builder.setTitle(title);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 Log.d("seekting", "ScoreFragment.onClick()" + scoreItem.id);
 
-                ScoreActivity scoreActivity = (ScoreActivity) getActivity();
-                boolean isRed = scoreActivity.mScoreActivityBinding.radioRed.isChecked();
 
 //                {
 //                    "score_group": "0",//0表示红方，1表示蓝方
@@ -118,7 +119,7 @@ public class ScoreFragment extends Fragment implements View.OnClickListener {
                 mConnectManager.write(str);
             }
         });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
