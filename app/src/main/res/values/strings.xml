@@ -28,4 +28,7 @@
     <string name="bar_control_scream">尖叫</string>
     <string name="bar_control_sound">枪声</string>
 
+    <string name="sure_score">确认扣分？</string>
+    <string name="red">红方</string>
+    <string name="blue">蓝方</string>
 </resources>

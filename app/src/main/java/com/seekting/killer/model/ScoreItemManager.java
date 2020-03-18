@@ -59,9 +59,11 @@ public class ScoreItemManager {
                                             index++;
                                             if (scoreItem.level == i - 1) {//它的上一级
                                                 scoreItems.push(scoreItem);
-                                                ScoreItem child = new ScoreItem(String.valueOf(index), line.trim(), i);
+                                                ScoreItem child = new ScoreItem("", line.trim(), i);
                                                 scoreItems.push(child);
                                                 scoreItem.mItems.add(child);
+                                                child.parent = scoreItem;
+                                                setItemId(scoreItem, child);
                                                 break out;
                                             }
 
@@ -76,15 +78,37 @@ public class ScoreItemManager {
                         }
                     });
                     mScoreItem = scoreItems.firstElement();
-                    print(mScoreItem);
+//                    print(mScoreItem);
 
-                    Log.d("seekting", "ScoreItemManager.run()" + mScoreItem);
+//                    Log.d("seekting", "ScoreItemManager.run()" + mScoreItem);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 mCountDownLatch.countDown();
             }
         }).start();
+    }
+
+    private void setItemId(ScoreItem parent, ScoreItem child) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        String mId = String.valueOf(parent.mItems.size());
+        if (parent.parent != null) {
+            stringBuilder.insert(0, parent.id + "-");
+        }
+        stringBuilder.append(mId);
+        child.id = stringBuilder.toString();
+    }
+
+    public ScoreItem getScoreItem() {
+        try {
+            mCountDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+        return mScoreItem;
+
     }
 
     private static void print(ScoreItem scoreItem) {

@@ -1,13 +1,15 @@
 package com.seekting.killer.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScoreItem {
+public class ScoreItem implements Serializable {
     public String id;
     public String name;
 
 
+    public ScoreItem parent;
     public int level;
     public List<ScoreItem> mItems = new ArrayList<>();
     public boolean selected;

@@ -5,7 +5,7 @@
 
         <variable
             name="activity"
-            type="com.seekting.killer.ScoreActivity"/>
+            type="com.seekting.killer.ScoreActivity" />
 
     </data>
 
@@ -18,20 +18,56 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_marginLeft="@dimen/margin"
-            android:src="@mipmap/back_arrow"
-            />
+            android:src="@mipmap/back_arrow" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin"
-            android:text="@string/score"
-            android:textColor="#1f1f1f"
-            android:textSize="28sp"/>
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:text="@string/score"
+                android:textColor="#1f1f1f"
+
+                android:textSize="28sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <RadioGroup
+                android:id="@+id/radiogroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/red" />
+
+                <RadioButton
+                    android:id="@+id/radio_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/blue" />
+            </RadioGroup>
+        </LinearLayout>
 
 
-
-
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
 
 
     </LinearLayout>
